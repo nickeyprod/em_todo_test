@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D1AB16782EB5589600D2148E /* ToDoTask+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AB166E2EB5532500D2148E /* ToDoTask+CoreDataClass.swift */; };
+		D1AB16792EB5589A00D2148E /* ToDoTask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AB166F2EB5532500D2148E /* ToDoTask+CoreDataProperties.swift */; };
+		D1AB16902EB558F500D2148E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AB16432EB546A400D2148E /* CoreDataStack.swift */; };
+		D1E8AE242EB564F700F37B5A /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D1AB16632EB550CC00D2148E /* TaskModel.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D1AB15BA2EB3421C00D2148E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +34,11 @@
 		D1AB15A82EB3421B00D2148E /* em_todo_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = em_todo_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AB15B92EB3421C00D2148E /* em_todo_testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = em_todo_testTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AB15C32EB3421C00D2148E /* em_todo_testUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = em_todo_testUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1AB16432EB546A400D2148E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		D1AB16642EB550CC00D2148E /* TaskModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskModel.xcdatamodel; sourceTree = "<group>"; };
+		D1AB166E2EB5532500D2148E /* ToDoTask+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoTask+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D1AB166F2EB5532500D2148E /* ToDoTask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoTask+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D1AB169B2EB5598F00D2148E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,10 +87,14 @@
 		D1AB159F2EB3421A00D2148E = {
 			isa = PBXGroup;
 			children = (
-				D1AB15AA2EB3421B00D2148E /* em_todo_test */,
+				D1AB166E2EB5532500D2148E /* ToDoTask+CoreDataClass.swift */,
+				D1AB166F2EB5532500D2148E /* ToDoTask+CoreDataProperties.swift */,
 				D1AB15BC2EB3421C00D2148E /* em_todo_testTests */,
 				D1AB15C62EB3421C00D2148E /* em_todo_testUITests */,
 				D1AB15A92EB3421B00D2148E /* Products */,
+				D1AB15AA2EB3421B00D2148E /* em_todo_test */,
+				D1AB16422EB5469B00D2148E /* CoreData */,
+				D1AB169A2EB5598F00D2148E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +108,31 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D1AB16412EB5431700D2148E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D1AB16632EB550CC00D2148E /* TaskModel.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D1AB16422EB5469B00D2148E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				D1AB16432EB546A400D2148E /* CoreDataStack.swift */,
+				D1AB16412EB5431700D2148E /* Models */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		D1AB169A2EB5598F00D2148E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1AB169B2EB5598F00D2148E /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,7 +140,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1AB15CD2EB3421C00D2148E /* Build configuration list for PBXNativeTarget "em_todo_test" */;
 			buildPhases = (
-				D1AB15A42EB3421A00D2148E /* Sources */,
+				D1AB16762EB5587100D2148E /* Sources */,
 				D1AB15A52EB3421A00D2148E /* Frameworks */,
 				D1AB15A62EB3421A00D2148E /* Resources */,
 			);
@@ -232,13 +273,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D1AB15A42EB3421A00D2148E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D1AB15B52EB3421C00D2148E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -250,6 +284,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1AB16762EB5587100D2148E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1AB16902EB558F500D2148E /* CoreDataStack.swift in Sources */,
+				D1AB16792EB5589A00D2148E /* ToDoTask+CoreDataProperties.swift in Sources */,
+				D1AB16782EB5589600D2148E /* ToDoTask+CoreDataClass.swift in Sources */,
+				D1E8AE242EB564F700F37B5A /* TaskModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +446,11 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "em-todo-test-Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -409,8 +458,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nickeyprod.em-todo-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -428,7 +480,11 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "em-todo-test-Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -436,8 +492,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nickeyprod.em-todo-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -549,6 +608,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D1AB16632EB550CC00D2148E /* TaskModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D1AB16642EB550CC00D2148E /* TaskModel.xcdatamodel */,
+			);
+			currentVersion = D1AB16642EB550CC00D2148E /* TaskModel.xcdatamodel */;
+			path = TaskModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D1AB15A02EB3421A00D2148E /* Project object */;
 }
