@@ -23,7 +23,6 @@ struct em_todo_testApp: App {
 
                     }
                     .preferredColorScheme(isDarkEnabled ? .dark : .light)
-                    .environment(\.isDarkModeEnabled, isDarkEnabled)
                     .environmentObject(router)
 
             }

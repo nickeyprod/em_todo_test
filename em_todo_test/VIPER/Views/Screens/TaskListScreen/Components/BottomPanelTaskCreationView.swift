@@ -20,7 +20,6 @@ struct BottomPanelTaskCreationView: View {
                     .foregroundStyle(Color("BottomPanelItemCountText"))
                 Spacer()
                 Button {
-                    print("new task")
                     router.go(to: .taskEditScreenView(task: nil))
                     
                 } label: {

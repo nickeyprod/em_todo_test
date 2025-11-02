@@ -65,8 +65,6 @@ struct TaskListScreenView: View {
         }
 
         .onAppear {
-            print("on appear")
-            
             // Try Load from CoreData, if empty load from web
             presenter.tryLoadTasks()
             
