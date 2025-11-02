@@ -9,6 +9,8 @@ import Foundation
 import CoreData
 import SwiftUI
 
+
+// Initialization of CoreData, taken from official Apple documentation website.
 class CoreDataStack: ObservableObject {
     static let shared = CoreDataStack()
     
@@ -17,6 +19,7 @@ class CoreDataStack: ObservableObject {
         
         // Pass the data model filename to the container’s initializer.
         let container = NSPersistentContainer(name: "TaskModel")
+//        persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
 //        persistentContainer.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         // Load any persistent stores, which creates a store if none exists.
@@ -48,53 +51,97 @@ extension CoreDataStack {
         }
     }
     
-    func createTask(todo: String, userId: Double) {
-        
-        persistentContainer.performBackgroundTask { context in
-            let newTask = ToDoTask(context: context)
-            newTask.todo = todo
-            newTask.userId = userId
-            newTask.dateCreated = Date()
-
-            do {
-                try context.save()
-                print("Saved new Task")
-            } catch {
-                print("Background save error:", error)
-            }
-        }
-    }
-    
+    // Get all tasks from CoreData and pass them, or error to callback function.
     func getAllTasks(completion: ((_ error: String?, _ tasksList: [ToDoTask]?) -> Void)) {
-        
+
         // Create a fetch request.
         let request = ToDoTask.fetchRequest()
 
-        // Sort the fetched results, such as ascending by name.
+        // Sort the fetched results, such as ascending by id.
         request.sortDescriptors = [NSSortDescriptor(keyPath: \ToDoTask.id, ascending: true)]
         
         do {
             // Attempt to get all tasks.
             let tasksList = try persistentContainer.viewContext.fetch(request)
-
-//            DispatchQueue.main.async {
-//                completion(nil, tasksList)
-//            }
-            
+            completion(nil, tasksList)
         } catch {
             // Handle the error appropriately.
             print("Failed to get tasks list:", error.localizedDescription)
-//            DispatchQueue.main.async {
-//                completion(error.localizedDescription, nil)
-//            }
+            completion(error.localizedDescription, nil)
         }
     }
     
-    func delete(item: ToDoTask) {
-        persistentContainer.performBackgroundTask { [weak self] context in
-            context.delete(item)
-            self?.save()
-        }
+    // Helping function, useful for debugging.
+    func removeAllTasks() {
         
+        // Create a fetch request.
+        let request = ToDoTask.fetchRequest()
+
+        do {
+            // Attempt to get all tasks.
+            let tasksList = try persistentContainer.viewContext.fetch(request)
+            // Deleting one by one.
+            for task in tasksList {
+                persistentContainer.viewContext.delete(task)
+            }
+            self.save()
+        } catch {
+            // Handle the error appropriately.
+            print("Failed to delete", error.localizedDescription)
+        }
+    }
+    
+    // Delete specific task item.
+    func delete(item: TaskModel, done: @escaping () -> Void) {
+        // Create a fetch request.
+        let request = ToDoTask.fetchRequest()
+        
+        // Get One Specific task.
+        request.predicate = NSPredicate(format: "id = \(item.id)")
+            
+        do {
+            // Try to delete.
+            if let safeTask = try persistentContainer.viewContext.fetch(request).first {
+                persistentContainer.viewContext.delete(safeTask)
+                self.save()
+                done()
+            }
+        } catch {
+            print("Error during deleting Task")
+        }
+    }
+    
+    // Saving changes made in specific one task.
+    func saveTask(task: TaskModel) {
+        
+        // Create a fetch request.
+        let request = ToDoTask.fetchRequest()
+        
+        // Get one specific task predicate.
+        request.predicate = NSPredicate(format: "id = \(task.id)")
+
+        do {
+            // Attempt to get specific task.
+            let coreDataTask = try persistentContainer.viewContext.fetch(request)
+            
+            // If task is in CoreData, update it
+            if let entityToUpdate = coreDataTask.first {
+                entityToUpdate.id = Double(task.id)
+                entityToUpdate.head = task.head
+                entityToUpdate.todo = task.todo
+                entityToUpdate.completed = task.completed
+            } else {
+                // IF task not found, create it from scratch
+                let newTask = ToDoTask(context: persistentContainer.viewContext)
+                newTask.head = task.head
+                newTask.todo = task.todo
+                newTask.userId = Double(task.userId)
+                newTask.dateCreated = task.dateCreated
+            }
+            
+            self.save()
+        } catch {
+            print("Saving error: ", error.localizedDescription)
+        }
     }
 }

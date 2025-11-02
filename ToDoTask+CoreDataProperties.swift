@@ -16,6 +16,7 @@ extension ToDoTask {
         return NSFetchRequest<ToDoTask>(entityName: "ToDoTask")
     }
 
+    @NSManaged public var head: String?
     @NSManaged public var completed: Bool
     @NSManaged public var dateCreated: Date?
     @NSManaged public var id: Double

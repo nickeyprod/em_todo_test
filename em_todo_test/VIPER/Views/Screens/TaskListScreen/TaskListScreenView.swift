@@ -10,77 +10,73 @@
 import SwiftUI
 
 struct TaskListScreenView: View {
-    
-    @EnvironmentObject var network: Network
-    
-    @State private var searchText: String = ""
-    @State var tasksList = [TaskModel]()
+
+    @StateObject var presenter = TaskListPresenter()
+    @Binding var isDarkEnabled: Bool
     
     var body: some View {
+        if (presenter.filteredItems.count == 0) {
+            Text("Упс, 0 задач! Загружаю из интернета!")
+                .foregroundStyle(Color.red)
+                .font(.title)
+        }
         ZStack(alignment: .bottom) {
+            
             List {
-                ForEach(tasksList.indices, id: \.self) { i in
+                ForEach(presenter.filteredItems.indices, id: \.self) { i in
                     // Row View
-                    ListRowView(headerText: getHeader(todoText: tasksList[i].todo), taskText: tasksList[i].todo, date: "02/03/2024", isShowDivider: tasksList[i].id == 1, completed: tasksList[i].completed)
+                    ListRowView(headerText: presenter.header(of: i), taskText: presenter.tasksList[i].todo ?? "", date: presenter.tasksList[i].dateCreated?.formatted() ?? Date().formatted(), isShowDivider: i == 0, completed: presenter.tasksList[i].completed)
                     .onTapGesture {
-                        // Check done
-                        checkAsDone(at: i)
+                        // Check task as done
+                        presenter.checkAsDone(at: i)
                     }
                     .contextMenu {
                         // Long press actions
-                        TaskListLongPressActionsView(task: tasksList[i])
+                        TaskListLongPressActionsView(task: presenter.tasksList[i]) {
+                            presenter.removeTask(task: presenter.tasksList[i])
+                        }
                     }
-                } // End For Each
-                .onDelete(perform: deleteTask)
+                }
+                // End For Each
                 .listRowSeparator(.hidden)
                 .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             } // End List
             .listStyle(.plain)
-            .searchable(text: $searchText)
+            .searchable(text: $presenter.searchText)
+            
+            if presenter.isLoading {
+                ProgressView()
+                    .scaleEffect(2)
+            }
+            // Panel with buttons for Task creation
+            BottomPanelTaskCreationView(taskCountString: presenter.getTaskCountString())
         } // End ZStack
         .navigationTitle("Задачи")
-        .onAppear {
-            network.getDataFromURL { error, data in
-                if (error != nil) {
-                    print(error)
-                } else {
-                    tasksList = data?.todos ?? []
+        .toolbar {
+            // Trailing button for turn on/off dark/light scheme
+            ToolbarItem(placement: .topBarTrailing) {
+                
+                Button {
+                    isDarkEnabled.toggle()
+                } label: {
+                    Image(systemName: isDarkEnabled ? "moon.circle.fill" : "moon.circle") // Use a system icon
                 }
             }
         }
-        // Panel with buttons for Task creation
-        BottomPanelTaskCreationView()
-        
-    } // End Body
-    func checkAsDone(at i: Int) {
-        tasksList[i].completed.toggle()
-    }
-    
-    func deleteTask(at offsets: IndexSet) {
-        print("remove")
-    }
-    
-    // prepare header for display
-    func getHeader(todoText: String) -> String {
-        let headerSplitted = todoText.split(separator: " ")
-        var header = ""
-        
-        // check for proposal in the middle, return 3 words
-        if (headerSplitted.count == 1) {
-            header = String(headerSplitted[0])
+
+        .onAppear {
+            print("on appear")
             
+            // Try Load from CoreData, if empty load from web
+            presenter.tryLoadTasks()
+            
+            // Turn ON to Fully Empty CoreData
+//            presenter.removeAllTasks()
+
         }
-        else if (headerSplitted[1].count == 1 || headerSplitted[1].count == 2) {
-            header = String(headerSplitted[0] + " " + headerSplitted[1] + " " + headerSplitted[2])
-        } else {
-            // if no proposal, return only 2 words
-            header = String(headerSplitted[0] + " " + headerSplitted[1])
-        }
-        
-        return header
-    }
+    } // End Body
 }
 
 #Preview {
-    TaskListScreenView()
+    TaskListScreenView(isDarkEnabled: .constant(false))
 }

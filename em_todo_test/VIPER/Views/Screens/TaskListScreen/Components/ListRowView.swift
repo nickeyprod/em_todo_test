@@ -35,6 +35,8 @@ struct ListRowView: View {
                     // Task Date Text
                     TaskDateView(date: date)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.blue.opacity(0.00000001))
                 .foregroundStyle(taskListItemHeadFont.color)
             }
             .frame(maxWidth: .infinity, alignment: .topLeading)

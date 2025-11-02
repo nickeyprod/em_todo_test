@@ -7,11 +7,11 @@
 
 import SwiftUICore
 
-// MARK: Все постоянные глобальные переменные отображены ниже
+// MARK: All CONSTANT GLOBAL Variables are listed below.
 
 let DUMMY_TASKS_URL = "https://dummyjson.com/todos"
 
-// MARK: - TaskView
+// MARK: - VARIABLES FOR TaskEditScreenView
 
 struct taskHeadTitleFont {
     static let name = "SF Pro"
@@ -39,7 +39,7 @@ struct taskTextFont {
     static let color = Color("taskHeadTitleDateFont")
 }
 
-// MARK: - TaskListView
+// MARK: - VARIABLES FOR TaskListScreenView
 
 struct taskListItemHeadFont {
     static let name = "SF Pro"
@@ -49,7 +49,6 @@ struct taskListItemHeadFont {
     static let letterSpacing = -0.43
     static let colorDone = Color("taskListItemHeadDoneFont")
     static let color = Color("taskListItemHeadFont")
-    
 }
 
 struct taskListItemTextFont {

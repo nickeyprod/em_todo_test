@@ -7,16 +7,19 @@
 
 import SwiftUICore
 
+// Simple Router for fast going from one Screen (View) to another.
 enum Screen: Hashable {
+    
     case taskListScreenView
-    case taskEditScreenView(task: TaskModel)
+    case taskEditScreenView(task: TaskModel?)
 }
 
 extension Screen: View {
+    
     var body: some View {
         switch self {
         case .taskListScreenView:
-            TaskListScreenView()
+            TaskListScreenView(isDarkEnabled: .constant(false))
         case .taskEditScreenView(let task):
             TaskEditScreenView(task: task)
         }
@@ -25,7 +28,7 @@ extension Screen: View {
 
 final class NavigationRouter: ObservableObject {
     @Published var screens = [Screen]()
-    
+
     func go(to screen: Screen) {
         screens.append(screen)
     }

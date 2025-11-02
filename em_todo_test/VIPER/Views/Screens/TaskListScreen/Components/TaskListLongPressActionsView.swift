@@ -13,18 +13,19 @@ struct TaskListLongPressActionsView: View {
     
     let task: TaskModel
     
+   var deleteAction: () -> Void
+    
     var body: some View {
         VStack {
             Button("Edit") {
-                print("go Editing")
                 router.go(to: .taskEditScreenView(task: task))
             }
             
             Button("Delete", role: .destructive) {
-                print("Deleting ")
                 // Perform delete action
+                deleteAction()
             }
-            ShareLink(item: "task.todo") {
+            ShareLink(item: task.todo ?? "") {
                 Label("Share", systemImage: "square.and.arrow.up")
             }
         }
@@ -32,7 +33,7 @@ struct TaskListLongPressActionsView: View {
 }
 
 #Preview {
-    TaskListLongPressActionsView(task: TaskModel(id: 1, todo: "gogo", completed: false, userId: 33))
+    TaskListLongPressActionsView(task: TaskModel(id: 1, todo: "gogo", completed: false, userId: 33), deleteAction: {})
         .environmentObject(NavigationRouter())
 }
 

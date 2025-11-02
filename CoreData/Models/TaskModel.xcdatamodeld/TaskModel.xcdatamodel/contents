@@ -3,6 +3,7 @@
     <entity name="ToDoTask" representedClassName=".ToDoTask" syncable="YES">
         <attribute name="completed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="head" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="todo" optional="YES" attributeType="String"/>
         <attribute name="userId" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
