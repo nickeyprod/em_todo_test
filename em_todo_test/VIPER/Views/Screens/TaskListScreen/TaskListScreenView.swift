@@ -16,12 +16,10 @@ struct TaskListScreenView: View {
     
     var body: some View {
         if (presenter.filteredItems.count == 0) {
-            Text("Упс, 0 задач! Загружаю из интернета!")
-                .foregroundStyle(Color.red)
-                .font(.title)
+            Text("Упс, задач не найдено")
+                .font(.title2)
         }
         ZStack(alignment: .bottom) {
-            
             List {
                 ForEach(presenter.filteredItems.indices, id: \.self) { i in
                     // Row View
@@ -55,7 +53,6 @@ struct TaskListScreenView: View {
         .toolbar {
             // Trailing button for turn on/off dark/light scheme
             ToolbarItem(placement: .topBarTrailing) {
-                
                 Button {
                     isDarkEnabled.toggle()
                 } label: {
@@ -68,7 +65,7 @@ struct TaskListScreenView: View {
             // Try Load from CoreData, if empty load from web
             presenter.tryLoadTasks()
             
-            // Turn ON to Fully Empty CoreData
+            // Turn ON this and Turn OFF .tryLoadTasks to Fully Empty CoreData
 //            presenter.removeAllTasks()
 
         }

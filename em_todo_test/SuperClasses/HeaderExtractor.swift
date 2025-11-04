@@ -12,6 +12,9 @@ class HeaderExtractor {
     // This function constructing a header, if no header in TaskModel.
     // If no header, extract header from task text for displaying
     func getHeader(todoText: String) -> String {
+        guard todoText != "" else {
+            return ""
+        }
         let headerSplitted = todoText.split(separator: " ")
         var header = ""
         

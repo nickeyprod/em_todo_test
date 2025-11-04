@@ -106,15 +106,12 @@ final class TaskListInteractor: ObservableObject {
     // This function converts CoreData models to TaskModels used in the App.
     func convertCoreDataTasksToTaskModels() {
         var convertedTasksList = [TaskModel]()
-        
         for task in self.tasksList {
             let newTask = TaskModel(id: Int(task.id), head: task.head, todo: task.todo, completed: task.completed, userId: Int(task.userId))
             convertedTasksList.append(newTask)
         }
+        self.presenter?.tasksList = convertedTasksList
+        self.presenter?.filteredItems = convertedTasksList
         
-        DispatchQueue.main.async {
-            self.presenter?.tasksList = convertedTasksList
-            self.presenter?.filteredItems = convertedTasksList
-        }
     }
 }
