@@ -14,7 +14,7 @@ struct CircleCheckmarkView: View {
         Image(systemName: completed ? "checkmark.circle" : "circle")
             .resizable()
             .frame(width: 24, height: 24)
-            .foregroundStyle(completed ? Color.yellow : Color("checkmarkNotDone"))
+            .foregroundStyle(completed ? Color.yellow : Color("CheckmarkNotDone"))
     }
 }
 

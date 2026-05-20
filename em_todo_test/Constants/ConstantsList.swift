@@ -5,7 +5,7 @@
 //  Created by Николай Ногин on 30.10.2025.
 //
 
-import SwiftUICore
+import SwiftUI
 
 // MARK: All CONSTANT GLOBAL Variables are listed below.
 

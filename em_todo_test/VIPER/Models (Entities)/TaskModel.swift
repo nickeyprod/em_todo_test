@@ -8,7 +8,7 @@
 import Foundation
 
 // TaskModel used throughout whole App.
-struct TaskModel: Codable, Equatable, Hashable {
+struct TaskModel: Decodable, Equatable, Hashable {
     
     var id: Int = Int.random(in: 1...1000000000000000)
     var head: String?

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUICore
+import SwiftUI
 
 // This Interactor of the TaskEditScreenView, interacts with CoreData.
 final class TaskEditInteractor: ObservableObject {

@@ -6,7 +6,7 @@
 //
 
 // This helping model just for Decode data from the WEB.
-struct TasksListJSON: Codable {
+struct TasksListJSON: Decodable {
     var todos: [TaskModel]
     var total: Int
     var skip: Int

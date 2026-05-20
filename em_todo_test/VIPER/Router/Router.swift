@@ -5,7 +5,7 @@
 //  Created by Николай Ногин on 31.10.2025.
 //
 
-import SwiftUICore
+import SwiftUI
 
 // Simple Router for fast going from one Screen (View) to another.
 enum Screen: Hashable {

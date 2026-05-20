@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUICore
+import SwiftUI
 
 // This Presenter of the TaskListScreenView, interacts with TaskListInteractor
 final class TaskListPresenter: HeaderExtractor, ObservableObject {
